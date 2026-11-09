@@ -1,0 +1,45 @@
+# DCM CRIATOR - Apache 2.4. Validate hosting/SSL behavior in Stage 9.
+# Canonicalization applies only to these two hosts; never to subdomains/localhost.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{HTTP_HOST} ^(?:www\.)?dcmcriator\.com(?::[0-9]+)?$ [NC]
+    RewriteCond %{HTTPS} !=on [OR]
+    RewriteCond %{HTTP_HOST} ^www\.dcmcriator\.com(?::[0-9]+)?$ [NC]
+    RewriteRule ^ https://dcmcriator.com%{REQUEST_URI} [R=301,L,NE]
+</IfModule>
+
+# Internal error document: keep the missing URL and its 404 status.
+ErrorDocument 404 /404.html
+
+<IfModule mod_mime.c>
+    AddType text/javascript .js .mjs
+</IfModule>
+
+# AddOutputFilterByType requires mod_filter; DEFLATE requires mod_deflate.
+# mod_deflate supplies Vary: Accept-Encoding itself.
+<IfModule mod_filter.c>
+    <IfModule mod_deflate.c>
+        AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/x-javascript image/svg+xml application/json application/ld+json application/xml text/xml text/plain
+    </IfModule>
+</IfModule>
+
+# Use only the explicit Cache-Control policies below, not inherited expires rules.
+<IfModule mod_expires.c>
+    ExpiresActive Off
+</IfModule>
+
+<IfModule mod_headers.c>
+    # Clear the normal header table and set a single value in the always table.
+    <FilesMatch "(?i)\.(?:jpe?g|png|webp|svg|gif|avif|ico|bmp|tiff?|woff2?|ttf|otf|eot|mp4|webm|ogg|ogv|mp3|wav|m4a|aac|mov|pdf)$">
+        Header onsuccess unset Cache-Control
+        Header always set Cache-Control "public, max-age=2592000"
+    </FilesMatch>
+    <FilesMatch "(?i)\.(?:css|js|mjs)$">
+        Header onsuccess unset Cache-Control
+        Header always set Cache-Control "public, max-age=86400"
+    </FilesMatch>
+    <FilesMatch "(?i)\.html?$">
+        Header onsuccess unset Cache-Control
+        Header always set Cache-Control "max-age=0, no-cache, must-revalidate"
+    </FilesMatch>
+</IfModule>

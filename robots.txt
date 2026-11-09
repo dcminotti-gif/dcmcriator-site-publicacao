@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+
+# Permitir crawlers de IA (visibilidade em buscas com IA)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+Sitemap: https://dcmcriator.com/sitemap.xml

@@ -1,0 +1,8 @@
+.dcm-encaixe { position: relative; isolation: isolate; overflow: hidden; }
+.dcm-encaixe > img { width: 100%; height: auto; display: block; }
+.dcm-encaixe__stage { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.dcm-encaixe--playing > img { opacity: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .dcm-encaixe > img { opacity: 1; }
+  .dcm-encaixe__stage { display: none; }
+}

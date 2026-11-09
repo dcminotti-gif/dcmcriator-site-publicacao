@@ -1,0 +1,15 @@
+# DCM CRIATOR
+
+> Webdesign e presença digital em Descalvado (SP), com atendimento online para profissionais autônomos e empresas de serviços.
+
+Resumo do site. Informações essenciais:
+
+- Serviços: sites institucionais, landing pages, portfólios online, Diagnóstico de Processos com IA e criação e gerenciamento do Perfil da Empresa no Google.
+- Área de atendimento: base em Descalvado (SP), com atendimento online.
+- Horário: segunda a sexta, das 09:00 às 17:00.
+- Contato: [WhatsApp comercial (19) 99445-4242](https://wa.me/5519994454242).
+
+## Páginas
+
+- [Início](https://dcmcriator.com/): apresentação, serviços, diferenciais, perguntas frequentes e contato.
+- [Política de Privacidade](https://dcmcriator.com/privacidade.html): política de privacidade e cookies.
