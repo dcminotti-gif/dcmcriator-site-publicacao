@@ -1596,6 +1596,10 @@ details[open] .faq-icon {
   gap: 1.5rem;
 }
 
+.footer-bottom > div:last-child {
+  color: #9CA3AF;
+}
+
 .footer-legal-link {
   color: #9CA3AF;
   transition: color var(--transition-fast);
