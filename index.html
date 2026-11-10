@@ -28,7 +28,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
 
   <!-- Folha de Estilos -->
-  <link rel="stylesheet" href="assets/css/style.css?v=1.0">
+  <link rel="stylesheet" href="assets/css/style.css?v=consent-1">
   <link rel="stylesheet" href="assets/encaixes/encaixes.css?v=1.0">
 
   <!-- Dados estruturados: website, página, organização, FAQ e breadcrumb -->
@@ -842,7 +842,7 @@
           <div class="ai-details-intro-wrapper">
             <div class="ai-details-media dcm-encaixe" data-encaixe="perfil-empresa-google">
               <img class="ai-details-img"
-                   src="assets/img/servicos/perfil-empresa-google.png"
+                   src="assets/img/servicos/perfil-empresa-google.webp"
                    width="1536" height="1024"
                    alt="Ilustra&#231;&#227;o em papel texturizado com marcador &#226;mbar, fachada comercial e cart&#227;o do perfil sobre a grade do mapa.">
             </div>
@@ -1068,14 +1068,12 @@
           </div>
         </div>
 
-        <div class="location-map-container" aria-label="Mapa da cidade de Descalvado - SP">
-          <iframe 
-            class="location-map-iframe"
-            title="Localização de Descalvado - SP"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d59298.5833458145!2d-47.66258079549326!3d-21.904838426027387!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94b875adbe6cb97d%3A0xe4a1cb6f3a7fe76b!2sDescalvado%20-%20SP!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr"
-            loading="lazy" 
-            referrerpolicy="no-referrer-when-downgrade">
-          </iframe>
+        <div class="location-map-container" aria-label="Mapa da cidade de Descalvado - SP" data-map-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d59298.5833458145!2d-47.66258079549326!3d-21.904838426027387!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94b875adbe6cb97d%3A0xe4a1cb6f3a7fe76b!2sDescalvado%20-%20SP!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr">
+          <div class="map-consent-placeholder">
+            <p>O mapa está bloqueado até você permitir cookies funcionais do Google Maps.</p>
+            <button type="button" class="btn btn-outline" data-cookie-preferences>Preferências do mapa</button>
+            <noscript>Ative o JavaScript para gerenciar as preferências e carregar o mapa.</noscript>
+          </div>
         </div>
       </div>
     </section>
@@ -1268,7 +1266,7 @@
         <div class="footer-legal-links">
           <a href="/privacidade.html" class="footer-legal-link">Política de Privacidade</a>
           <span>·</span>
-          <a href="#contato" class="footer-legal-link">Gerenciar cookies</a>
+          <button type="button" class="footer-legal-link cookie-manage" data-cookie-preferences>Gerenciar cookies</button>
         </div>
         <div>
           © 2026 DCM CRIATOR. Todos os direitos reservados. Desenvolvido por DCM CRIATOR.
@@ -1284,6 +1282,7 @@
     <span>WhatsApp</span>
   </a>
 
+  <script type="module" src="assets/js/consent.js?v=1"></script>
   <!-- Script Principal -->
   <script type="module" src="assets/js/main.js?v=encaixes-2"></script>
 </body>

@@ -1360,6 +1360,38 @@ section.section:not(.hero-section) {
   filter: grayscale(85%) contrast(1.1);
 }
 
+.map-consent-placeholder {
+  height: 100%;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+}
+
+.map-consent-placeholder[hidden] { display: none; }
+.cookie-manage { background: none; border: 0; padding: 0; font: inherit; cursor: pointer; }
+.cookie-preferences {
+  margin: auto;
+  width: min(94vw, 620px);
+  max-height: 90dvh;
+  overflow: auto;
+  padding: 1.5rem;
+  border: 2px solid var(--color-border);
+  color: var(--color-primary);
+  background: #fff;
+}
+.cookie-preferences::backdrop { background: rgb(0 0 0 / 55%); }
+.cookie-preferences h2, .cookie-preferences p { margin-bottom: 1rem; }
+.cookie-preferences label { display: flex; align-items: center; gap: .6rem; }
+.cookie-actions { display: flex; flex-wrap: wrap; gap: .75rem; }
+.cookie-preferences :focus-visible, .cookie-manage:focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: 4px;
+}
+
 /* ==========================================================================
    Seção 9: FAQ (#faq)
    ========================================================================== */
