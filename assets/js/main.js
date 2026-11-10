@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const mobileLinks = document.querySelectorAll('.mobile-nav-link');
   const navLinks = document.querySelectorAll('.nav-link');
   const fabWhatsapp = document.getElementById('fabWhatsapp');
+  const heroSection = document.getElementById('hero');
   const contactSection = document.getElementById('contato');
 
   // 1. Controle do Menu Mobile
@@ -33,6 +34,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   menuToggle?.addEventListener('click', openMobileMenu);
   mobileClose?.addEventListener('click', closeMobileMenu);
+  mobileOverlay?.addEventListener('click', (event) => {
+    if (event.target instanceof Element && event.target.matches(
+      '#mobileOverlay, .mobile-overlay-header, .mobile-nav-list, .mobile-overlay-footer'
+    )) {
+      closeMobileMenu();
+    }
+  });
 
   mobileLinks.forEach(link => {
     link.addEventListener('click', () => {
@@ -78,8 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function updateFabVisibility() {
     if (!fabWhatsapp) return;
 
-    const scrollY = window.scrollY;
-    const shouldShow = scrollY > 350;
+    const shouldShow = !!heroSection && heroSection.getBoundingClientRect().bottom <= 0;
 
     let inContact = false;
     if (contactSection) {
