@@ -1729,13 +1729,23 @@ details[open] .faq-icon {
   }
 
   .hero-section {
+    --hero-mobile-art-height: clamp(220px, 62vw, 360px);
     padding-top: calc(var(--header-height-mobile) + 2rem);
-    padding-bottom: 1.5rem;
+    padding-bottom: calc(var(--hero-mobile-art-height) + 1.5rem);
     min-height: auto;
     align-items: flex-start;
-    background-image: url('../img/hero-geometrico-mobile.webp');
-    background-size: cover;
-    background-position: center bottom;
+    /* Keep the approved artwork in a separate strip below the content. */
+    background-image: linear-gradient(#F5F0E7, #F5F0E7), url('../img/hero-geometrico-mobile.webp');
+    background-size: 100% calc(100% - var(--hero-mobile-art-height)), 100% auto;
+    background-position: left top, right bottom;
+    background-repeat: no-repeat;
+  }
+
+  .hero-art-stage {
+    top: auto;
+    bottom: 0;
+    height: var(--hero-mobile-art-height);
+    overflow: hidden;
   }
 
   .hero-content { max-width: none; }
@@ -1751,6 +1761,8 @@ details[open] .faq-icon {
   .hero-lead { margin-bottom: 1.25rem; }
 
   .hero-actions { margin-bottom: 1rem; }
+
+  .hero-slogan-badge { display: block; }
 
   .credibility-section {
     padding-top: 2.5rem;
