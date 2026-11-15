@@ -1732,7 +1732,10 @@ details[open] .faq-icon {
     --hero-mobile-art-height: clamp(220px, 62vw, 360px);
     padding-top: calc(var(--header-height-mobile) + 2rem);
     padding-bottom: calc(var(--hero-mobile-art-height) + 1.5rem);
-    min-height: auto;
+    /* The fixed header is already counted in padding-top. */
+    min-height: 100vh;
+    min-height: 100svh;
+    min-height: 100dvh;
     align-items: flex-start;
     /* Keep the approved artwork in a separate strip below the content. */
     background-image: linear-gradient(#F5F0E7, #F5F0E7), url('../img/hero-geometrico-mobile.webp');
@@ -1741,7 +1744,7 @@ details[open] .faq-icon {
     background-repeat: no-repeat;
   }
 
-  .hero-art-stage {
+  .hero-section > .hero-art-stage {
     top: auto;
     bottom: 0;
     height: var(--hero-mobile-art-height);
