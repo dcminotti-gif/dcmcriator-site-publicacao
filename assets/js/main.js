@@ -1,5 +1,3 @@
-import { animateServiceArt, stopServiceArt } from '../encaixes/encaixes.mjs?v=1.0';
-
 /**
  * DCM CRIATOR — Script Principal (One Page)
  * Comportamentos de Navegação, Menu Mobile e Interações Acessíveis
@@ -13,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const navLinks = document.querySelectorAll('.nav-link');
   const fabWhatsapp = document.getElementById('fabWhatsapp');
   const heroSection = document.getElementById('hero');
+  runArt('animateHeroArt', heroSection);
   const contactSection = document.getElementById('contato');
 
   // 1. Controle do Menu Mobile
@@ -63,21 +62,23 @@ document.addEventListener('DOMContentLoaded', () => {
     threshold: 0
   };
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const id = entry.target.getAttribute('id');
-        navLinks.forEach(link => {
-          link.classList.remove('active');
-          if (link.getAttribute('href') === `#${id}`) {
-            link.classList.add('active');
-          }
-        });
-      }
-    });
-  }, observerOptions);
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${id}`) {
+              link.classList.add('active');
+            }
+          });
+        }
+      });
+    }, observerOptions);
 
-  sections.forEach(section => observer.observe(section));
+    sections.forEach(section => observer.observe(section));
+  }
 
   // 3. WhatsApp flutuante: preserve o espaço dos controles da página.
   const fabControls = [...document.querySelectorAll('main a[href], main button, main summary, .site-footer a[href]')];
@@ -125,12 +126,19 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('resize', queueFabVisibility, { passive: true });
   document.addEventListener('toggle', queueFabVisibility, true);
   const pageContent = document.querySelector('main');
-  if (fabWhatsapp && pageContent) new ResizeObserver(queueFabVisibility).observe(pageContent);
+  if (fabWhatsapp && pageContent && 'ResizeObserver' in window) {
+    new ResizeObserver(queueFabVisibility).observe(pageContent);
+  }
   queueFabVisibility();
 
   // 4. Detalhamento dos Serviços (Saiba mais / Fechar detalhes)
   const toggleButtons = document.querySelectorAll('.btn-toggle-detail');
   const closeButtons = document.querySelectorAll('.btn-close-detail');
+
+  function runArt(method, frame) {
+    try { Promise.resolve(window.DcmEncaixes?.[method]?.(frame)).catch(() => {}); }
+    catch { /* Keep controls available if optional artwork fails. */ }
+  }
 
   const artObservers = new WeakMap();
   function stopPanelArt(panel) {
@@ -138,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!frame) return;
     artObservers.get(frame)?.disconnect();
     artObservers.delete(frame);
-    stopServiceArt(frame);
+    runArt('stopServiceArt', frame);
   }
 
   function startPanelArt(panel) {
@@ -146,11 +154,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!frame) return;
     stopPanelArt(panel);
     // Wait for the artwork to enter the viewport during the existing scroll.
+    if (!('IntersectionObserver' in window)) {
+      if (!panel.hidden) runArt('animateServiceArt', frame);
+      return;
+    }
     const observer = new IntersectionObserver(entries => {
       if (!entries.some(entry => entry.isIntersecting && entry.intersectionRatio >= 0.5)) return;
       observer.disconnect();
       artObservers.delete(frame);
-      if (!panel.hidden) animateServiceArt(frame);
+      if (!panel.hidden) runArt('animateServiceArt', frame);
     }, { threshold: [0, 0.5] });
     artObservers.set(frame, observer);
     observer.observe(frame);
